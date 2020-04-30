@@ -26,10 +26,11 @@
 </style>
 
     <section class="content">
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 breadcrumbf">
-                    <a href="#"><i class="fa fa-home"></i> Home</a> <span class="diviver"><i class="fa fa-angle-right"></i></span> <a href="#">General Discussion</a> <span class="diviver"><i class="fa fa-angle-right"></i></span> <a href="#">Topic Details</a>
+                    <a href="{{ route('forum') }}"><i class="fa fa-home"></i> Home</a> <span class="diviver"> <i class="fa fa-angle-right"></i></span> <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}">{{ $discussion->channel->title }}</a> <span class="diviver"> <i class="fa fa-angle-right"></i></span> <a href="{{ route('discussion', ['slug' => $discussion->slug ]) }}">{{ $discussion->title }}</a>
                 </div>
             </div>
         </div>
@@ -261,8 +262,8 @@
                             </div>
                         </form>
                     @else
-                        <div class="text-center">
-                            <h2>Sign in to reply.</h2>
+                        <div class="text-center" style="padding: 30px;">
+                            <h2><a href="{{ route('login') }}" target="_blank" style="color: #3498db;">Sign in</a> to reply.</h2>
                         </div>
 
                     @endif

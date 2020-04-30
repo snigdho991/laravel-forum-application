@@ -5,6 +5,15 @@
     <section class="content">
         <div class="container">
             <div class="row">
+                <div class="col-lg-8 breadcrumbf" style="margin-bottom: -20px;">
+                    <a href="{{ route('forum') }}"><i class="fa fa-home"></i> Home</a> <span class="diviver"> <i class="fa fa-angle-right"></i></span> <a href="{{ route('channel', ['slug' => $cha->slug ]) }}">{{ $cha->title }} </a>
+                
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
                 <div class="col-lg-8 col-xs-12 col-md-8">
                     <div class="pull-left">
                         <ul class="paginationforum">

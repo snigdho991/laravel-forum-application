@@ -64,7 +64,7 @@
                                             <a href="{{ route('social.auth', ['provider' => 'google']) }}" class="btn btn-gp">Link Google + Account</a>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
-                                            <a href="{{ url('/login') }}" class="btn btn-pin">Link Pinterest Account</a>                                                       
+                                            <a href="{{ route('join') }}" class="btn btn-pin">Link Pinterest Account</a>                                                       
                                         </div>
                                     </div>
 
