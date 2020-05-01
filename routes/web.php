@@ -81,7 +81,6 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::group(['middleware' => 'auth'], function(){
 	Route::resource('channels', 'ChannelsController');
 
-
 	Route::get('/discussion/create/new', [
 	    'uses' => 'DiscussionsController@create',
 		'as'   => 'discussions.create'
@@ -107,10 +106,24 @@ Route::group(['middleware' => 'auth'], function(){
 		'as'   => 'discussion.unupvote'
 	]);
 
+	Route::get('/discussion/watch/{id}', [
+		'uses' => 'WatchersController@watch',
+		'as'   => 'discussion.watch'
+	]);
+
+	Route::get('/discussion/unwatch/{id}', [
+		'uses' => 'WatchersController@unwatch',
+		'as'   => 'discussion.unwatch'
+	]);
+
 	Route::post('/reply/like', [
 		'uses' => 'RepliesController@likeReply',
 		'as'   => 'like'
 	]);
 
+	Route::get('/discussion/reply/best/{id}', [
+		'uses' => 'RepliesController@best_answer',
+		'as'   => 'discussion.best.answer'
+	]);
 
 });

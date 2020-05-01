@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
         App\User::create([
             'name'     => 'Argho',
             'password' => bcrypt('123'),
-            'email'    => 'argho@forum.com',
+            'email'    => 'argho@bdforum.com',
             'avatar'   => asset('avatars/avatar.png')
         ]);
     }

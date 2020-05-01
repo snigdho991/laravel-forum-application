@@ -56,7 +56,7 @@
                                 </div>
 
                             </div>
-                            <div class="views"><img src="{{ asset('app/images/icon4.jpg') }}" alt="img" /> {{ $dis->upvotes->count() }} @if( $dis->upvotes->count() < 2) upvote @else upvotes @endif </div>
+                            <div class="views"><img src="{{ asset('app/images/icon4.jpg') }}" alt="img" /> {{ $dis->upvotes->count() }} @if($dis->upvotes->count() < 2) upvote @else upvotes @endif </div>
                             <div class="time"><i class="fa fa-clock-o"></i> {{ $dis->created_at->diffForHumans() }}</div>                                    
                         </div>
                         <div class="clearfix"></div>

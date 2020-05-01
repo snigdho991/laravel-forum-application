@@ -45,4 +45,28 @@ class Discussion extends Model
             return false;
         }
     }
+
+
+    public function watchers()
+    {
+        return $this->hasMany('App\Watcher');
+    }
+
+
+    public function is_being_watched_by_auth_user()
+    {
+        $id = Auth::id();
+
+        $watchers_id = array();
+
+        foreach ($this->watchers as $wch) {
+            array_push($watchers_id, $wch->user_id);
+        }
+
+        if (in_array($id, $watchers_id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

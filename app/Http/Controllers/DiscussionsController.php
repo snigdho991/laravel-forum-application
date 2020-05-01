@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Discussion;
 use App\Reply;
+use App\User;
 use App\Upvote;
+
+use Notification;
 use Session;
 use Auth;
 
@@ -67,7 +70,13 @@ class DiscussionsController extends Controller
      */
     public function show($slug)
     {
-        return view('discussions.show')->with('discussion', Discussion::where('slug', $slug)->first())->with('user', auth()->user());
+        $discussion = Discussion::where('slug', $slug)->first();
+
+        $best = $discussion->replies()->where('best_answer', 1)->first();
+
+        return view('discussions.show')->with('discussion', $discussion)                           
+                                       ->with('user', auth()->user())
+                                       ->with('best_answer', $best);
     }
 
     /**
@@ -107,18 +116,28 @@ class DiscussionsController extends Controller
     public function reply($id)
     {
         $d = Discussion::find($id);
-
+        
         $r = Reply::create([
             'user_id'       => Auth::id(),
             'discussion_id' => $id,
             'content'       => request()->reply
-
         ]);
 
-        Session::flash('success', 'Replied successfully in the discussion !');
+        $watchers = array();
+
+        foreach ($d->watchers as $watcher) {
+            array_push($watchers, User::find($watcher->user_id));
+        }
+
+
+        Notification::send($watchers, new \App\Notifications\NewReplyAdded($d, $r));
+
+
+        Session::flash('success', 'Replied successfully in this discussion !');
 
         return redirect()->back();
     }
+
 
     public function upvote($id)
     {

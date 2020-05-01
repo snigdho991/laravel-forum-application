@@ -37,7 +37,7 @@
                             @if (!Auth::user()->avatar)
                                 <a data-toggle="dropdown" href="#"><img src="{{ asset('avatars/avatar2.png') }}" alt="Image" /></a>
                             @else
-                                <a data-toggle="dropdown" href="#"><img src="{{ Auth::user()->avatar }}" alt="Image" /></a>
+                                <a data-toggle="dropdown" href="#"><img src="{{ Auth::user()->avatar }}" alt="Image" height="37px" width="37px" /></a>
                             @endif
                         <b class="caret"></b>
                         <div class="status green">&nbsp;</div>
