@@ -42,7 +42,7 @@
                         <b class="caret"></b>
                         <div class="status green">&nbsp;</div>
                         <ul class="dropdown-menu" role="menu">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">My Profile</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">My Profile ({{ Auth::user()->name }})</a></li>
                             <li role="presentation"><a role="menuitem" tabindex="-2" href="{{ url('/logout') }}">Log Out</a></li>
                         </ul>
                     </div>

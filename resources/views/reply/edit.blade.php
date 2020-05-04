@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 breadcrumbf">
-                <a href="{{ route('forum') }}"><i class="fa fa-home"></i> Home</a> <span class="diviver"> <i class="fa fa-angle-right"></i></span> <a href="{{ route('discussion.create') }}">Start New Discussion</a>
+                <a href="{{ route('forum') }}"><i class="fa fa-home"></i> Home</a> <span class="diviver"> <i class="fa fa-angle-right"></i></span> <a href="{{ route('reply.edit', ['id' => $reply->id]) }}">Edit Reply</a>
             </div>
         </div>
     </div>
@@ -21,11 +21,11 @@
                 <!-- POST -->
                 <div class="post">
 
-                    <form action="{{ route('discussions.store') }}" class="form newtopic" method="post">
+                    <form action="{{ route('reply.update', ['id' => $reply->id]) }}" class="form newtopic" method="post">
                         {{ csrf_field() }}
 
                         <div class="postinfotop">
-                            <h2 class="text-center">Create New Disscussion</h2>
+                            <h2 class="text-center">Update Your Reply</h2>
                         </div>
 
                         <div class="topwrap">
@@ -36,31 +36,14 @@
                                     <div class="row">
                                         
                                     </div>
-
+                                    
                                     <div>
-                                        <label for="title">Disscussion Title :</label> 
-                                        <div>
-                                            <input type="text" name="title" placeholder="Enter Disscussion Title" value="{{ old('title') }}" class="form-control" />
-                                        </div>
+                                        <label for="content">Existing Reply :</label> 
+                                        <textarea name="content" cols="15" rows="40" id="content" class="form-control" placeholder="Enter Disscussion Content">{{ $reply->content }}</textarea>
                                     </div>
 
                                     <div>
-                                        <label for="channel">Pick a Channel :</label> 
-                                        <select name="channel_id" id="channel_id" class="form-control" >
-                                                <option value="" disabled selected>Select Channel</option>
-                                            @foreach($channels as $channel)
-                                                <option value="{{ $channel->id }}">{{ $channel->title }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div>
-                                        <label for="content">Ask a Question :</label> 
-                                        <textarea name="content" cols="15" rows="40" id="content" class="form-control" placeholder="Enter Disscussion Content">{{ old('content') }}</textarea>
-                                    </div>
-
-                                    <div>
-                                        <button class="btn btn-success" type="submit">Create Disscussion</button>
+                                        <button class="btn btn-success" type="submit">Save Reply Changes</button>
                                     </div>
                                     <div class="row">
                                         

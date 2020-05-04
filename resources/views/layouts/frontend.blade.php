@@ -2,7 +2,7 @@
 <html lang="en">
     
 <!-- Mirrored from forum.azyrusthemes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 19 Apr 2020 17:26:31 GMT -->
-<head>
+    <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Forum :: Home Page</title>
@@ -32,15 +32,15 @@
 
         <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}"/>
 
-</head>
-    <body>
+        @yield('styles')
 
+    </head>
+
+    <body>
         <div class="container-fluid">
 
-            <!-- Slider -->
                 @include('includes.slider')
-            <!-- //Slider -->
-
+            
                 @include('includes.headernav')
 
                     @yield('content')
@@ -105,7 +105,16 @@
               $('[data-toggle="tooltip"]').tooltip();   
             });
         </script>
-        
+
+        <script>
+            $('.opt').on('click', function() {
+                $(location).attr('href', this.value);
+                console.log(this.value);
+            });
+        </script>
+
+        @yield('scripts')
+
     </body>
 
 <!-- Mirrored from forum.azyrusthemes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 19 Apr 2020 17:26:47 GMT -->

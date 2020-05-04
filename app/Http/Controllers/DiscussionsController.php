@@ -57,7 +57,10 @@ class DiscussionsController extends Controller
             'slug'       => str_slug($request->title)
         ]);
 
-        Session::flash('success', 'Discussion created successfully !');
+        $discussion->user->experience_point += 25;
+        $discussion->user->save();
+
+        Session::flash('success', 'Discussion created successfully (+25) !');
 
         return redirect()->route('discussion', ['slug' => $discussion->slug ]);
     }
@@ -74,7 +77,7 @@ class DiscussionsController extends Controller
 
         $best = $discussion->replies()->where('best_answer', 1)->first();
 
-        return view('discussions.show')->with('discussion', $discussion)                           
+        return view('discussions.show')->with('discussion', $discussion)                         
                                        ->with('user', auth()->user())
                                        ->with('best_answer', $best);
     }
@@ -85,9 +88,10 @@ class DiscussionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $discussion = Discussion::where('slug', $slug)->first();
+        return view('discussions.edit')->with('discussion', $discussion);
     }
 
     /**
@@ -97,9 +101,36 @@ class DiscussionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $discussion = Discussion::where('slug', $slug)->first();
+
+        if(Auth::check()){
+            if(Auth::id() == $discussion->user_id){
+                if(!$discussion->hasBestAnswer()){
+                    $discussion->title   = $request->title;
+                    $discussion->slug    = str_slug($request->title);
+                    $discussion->content = $request->content;
+                    $discussion->save();
+
+                    Session::flash('info', 'Discussion updated successfully !');
+                    return redirect()->route('discussion', ['slug' => $discussion->slug ]);  
+                } else {
+                    Auth::user()->experience_point -= 5;
+                    Auth::user()->save();
+
+                    Session::flash('error', 'You can not update closed discussion (-5) !');
+                    return redirect()->route('discussion', ['slug' => $discussion->slug ]); 
+                }
+
+            } else {
+                Auth::user()->experience_point -= 15;
+                Auth::user()->save();
+
+                Session::flash('error', 'You can not update other\'s discussion (-15) !');
+                return redirect()->route('discussion', ['slug' => $discussion->slug ]); 
+            }
+        }   
     }
 
     /**
@@ -123,6 +154,9 @@ class DiscussionsController extends Controller
             'content'       => request()->reply
         ]);
 
+        $r->user->experience_point += 20;
+        $r->user->save();
+
         $watchers = array();
 
         foreach ($d->watchers as $watcher) {
@@ -133,7 +167,7 @@ class DiscussionsController extends Controller
         Notification::send($watchers, new \App\Notifications\NewReplyAdded($d, $r));
 
 
-        Session::flash('success', 'Replied successfully in this discussion !');
+        Session::flash('success', 'Replied successfully in this discussion (+20) !');
 
         return redirect()->back();
     }

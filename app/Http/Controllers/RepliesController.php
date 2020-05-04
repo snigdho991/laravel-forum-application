@@ -73,11 +73,71 @@ class RepliesController extends Controller
     {
         $reply = Reply::find($id);
 
-        $reply->best_answer = 1;
-        $reply->save();
+        if(Auth::check()){
+            if(Auth::id() == $reply->discussion->user->id){
+                if(!$reply->discussion->hasBestAnswer()){
 
-        Session::flash('success', 'Reply has been marked as best answer !');
+                    $reply->best_answer = 1;
+                    $reply->save();
+
+                    $reply->user->experience_point += 30;
+                    $reply->user->save();
+
+                    Session::flash('success', 'Reply has been marked as best answer !');
+                } else {
+                    Auth::user()->experience_point -= 10;
+                    Auth::user()->save();
+
+                    Session::flash('error', 'You can not change the best answer of closed discussion (-10) !');
+                    return redirect()->route('discussion', ['slug' => $reply->discussion->slug ]); 
+                }
+            } else {
+                Auth::user()->experience_point -= 30;
+                Auth::user()->save();
+
+                Session::flash('error', 'You can not mark reply as best of other\'s discussion (-30) !');
+                return redirect()->route('discussion', ['slug' => $reply->discussion->slug ]); 
+
+            }
+        }
 
         return redirect()->back();
+    }
+
+    public function edit($id)
+    {
+        $reply = Reply::find($id);
+        return view('reply.edit')->with('reply', $reply);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $reply = Reply::find($id);
+
+        if(Auth::check()){
+            if(Auth::id() == $reply->user_id){
+                if(!$reply->best_answer){
+
+                    $reply->content = $request->content;
+                    $reply->save();
+
+                    Session::flash('info', 'Reply updated successfully !');
+                    return redirect()->route('discussion', ['slug' => $reply->discussion->slug ]);  
+                } else {
+                    Auth::user()->experience_point -= 5;
+                    Auth::user()->save();
+
+                    Session::flash('error', 'You can not update your best answer (-5) !');
+                    return redirect()->route('discussion', ['slug' => $reply->discussion->slug ]); 
+                }
+
+            } else {
+                Auth::user()->experience_point -= 15;
+                Auth::user()->save();
+
+                Session::flash('error', 'You can not update other\'s reply (-15) !');
+                return redirect()->route('discussion', ['slug' => $reply->discussion->slug ]); 
+            }
+        }   
     }
 }

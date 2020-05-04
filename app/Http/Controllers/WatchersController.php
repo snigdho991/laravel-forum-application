@@ -12,22 +12,28 @@ class WatchersController extends Controller
 {
     public function watch($id)
     {
-    	Watcher::create([
+    	$w = Watcher::create([
     		'user_id'       => Auth::id(),
     		'discussion_id' => $id
     	]);
 
-    	Session::flash('success', 'You are following this discussion from now !');
+        $w->user->experience_point += 50;
+        $w->user->save();
+
+    	Session::flash('success', 'You are following this discussion from now (+50) !');
 
         return redirect()->back();
     }
 
     public function unwatch($id)
     {
+        Auth::user()->experience_point -= 50;
+        Auth::user()->save();
+        
     	$watch = Watcher::where('user_id', Auth::id())->where('discussion_id', $id);
     	$watch->delete();
 
-    	Session::flash('error', 'You are not following this discussion from now !');
+    	Session::flash('error', 'You are not following this discussion from now (-50) !');
 
         return redirect()->back();
     }

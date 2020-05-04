@@ -4,7 +4,7 @@
         <div class="blocktxt">
             <ul class="cats">
             @foreach($channels as $channel)
-                <li><a href="{{ route('channel', ['slug' => $channel->slug ]) }}">{{ $channel->title }} <span class="badge pull-right">20</span></a></li>
+                <li><a href="{{ route('channel', ['slug' => $channel->slug ]) }}">{{ $channel->title }} <span class="badge pull-right">{{ $channel->discussions->count() }}</span></a></li>
             @endforeach
             </ul>
         </div>
