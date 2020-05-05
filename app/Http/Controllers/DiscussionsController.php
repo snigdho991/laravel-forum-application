@@ -144,6 +144,21 @@ class DiscussionsController extends Controller
         //
     }
 
+    //Admin Tools
+
+    public function delete($slug)
+    {
+        $discussion = Discussion::where('slug', $slug)->first();
+
+        $discussion->delete();
+
+        Auth::user()->experience_point += 10;
+        Auth::user()->save();
+
+        Session::flash('warning', 'Discussion deleted successfully (+10) !');
+        return redirect()->route('forum');
+    }
+
     public function reply($id)
     {
         $d = Discussion::find($id);

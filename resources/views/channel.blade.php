@@ -43,8 +43,8 @@
                             </div>
                             <div class="posttext pull-left">
                                 
-                                <h2><span style="color: #697683; font-weight: 300;">{{ $dis->user->name }} : </span> <a href="{{ route('discussion', ['slug' => $dis->slug ]) }} ">{{ str_limit($dis->title, 40) }}</a></h2>
-                                <p>{{ str_limit($dis->content, 120) }}</p>
+                                <h2><span style="color: #697683; font-weight: 300;">{{ $dis->user->name }} : </span> <a href="{{ route('discussion', ['slug' => $dis->slug ]) }} ">{{ str_limit(strip_tags($dis->title), 30) }}</a></h2>
+                                <p>{{ str_limit(strip_tags($dis->content), 120) }}</p>
                                 
                             </div>
                             <div class="clearfix"></div>

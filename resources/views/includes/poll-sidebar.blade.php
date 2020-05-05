@@ -1,6 +1,6 @@
 @if(Auth::check())
     <div class="sidebarblock">
-        <h3>My Threads</h3>
+        <h3>My Active Threads</h3>
         <div class="divline"></div>
         <div class="blocktxt">
             

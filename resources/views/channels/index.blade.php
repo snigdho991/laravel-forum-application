@@ -77,6 +77,8 @@
                 
                 @include('includes.poll-sidebar')
 
+                @include('includes.admin-sidebar')
+
 
             </div>
         </div>

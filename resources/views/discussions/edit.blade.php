@@ -58,7 +58,7 @@
 
                                     <div>
                                         <label for="content">Ask a Question :</label> 
-                                        <textarea name="content" cols="15" rows="40" id="content" class="form-control" placeholder="Enter Disscussion Content">{{ $discussion->content }}</textarea>
+                                        <textarea name="content" cols="15" rows="40" id="content" class="form-control" placeholder="Enter Disscussion Content">@markdown($discussion->content)</textarea>
                                     </div>
 
                                     <div>

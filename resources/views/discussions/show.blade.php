@@ -1,3 +1,4 @@
+
 @extends('layouts.frontend')
 
 @section('content')
@@ -54,7 +55,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 breadcrumbf">
-                    <a href="{{ route('forum') }}"><i class="fa fa-home"></i> Home</a> <span class="diviver"> <i class="fa fa-angle-right"></i></span> <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}"><b>{{ $discussion->channel->title }}</b></a> <span class="diviver"> <i class="fa fa-angle-right"></i></span> <a href="{{ route('discussion', ['slug' => $discussion->slug ]) }}">{{ $discussion->title }}</a>
+                    <a href="{{ route('forum') }}"><i class="fa fa-home"></i> Home</a> <span class="diviver"> <i class="fa fa-angle-right"></i></span> <a href="{{ route('channel', ['slug' => $discussion->channel->slug ]) }}"><b>{{ $discussion->channel->title }}</b></a> <span class="diviver"> <i class="fa fa-angle-right"></i></span> <a href="{{ route('discussion', ['slug' => $discussion->slug ]) }}">{!! $discussion->title !!}</a>
                 </div>
             </div>
         </div>
@@ -84,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="posttext pull-left">
-                                <h2><span style="color: #697683; font-weight: 300;">{{ $discussion->user->name }} : </span> {{ $discussion->title }} 
+                                <h2><span style="color: #697683; font-weight: 300;">{{ $discussion->user->name }} : </span> {!! $discussion->title !!} 
                                     <span style="color: #697683;font-size: 12px; font-weight: bold; ; margin-left: 10px;"><i class="fa fa-reply" style="font-size: 12px; margin-right: 3px;"> </i> {{ $discussion->created_at->diffForHumans() }}
                                     </span>
                         @if (Auth::check())
@@ -98,7 +99,7 @@
                         @endif
 
                                 </h2>
-                                <p>{{ $discussion->content }}</p>
+                                <p> @markdown($discussion->content) </p>
                             </div>
                             
                             <div class="clearfix"></div>
@@ -170,7 +171,7 @@
                                                 <div class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="right" title="Experience Points"> <span class="badge" style="background-color: #e67e22;">{{ $best_answer->user->experience_point }}</span> EP</div>
                                             @endif
                                         </div>
-                                        <div class="panel-body">{{ $best_answer->content }}</div>
+                                        <div class="panel-body">{!! $best_answer->content !!}</div>
                                     </div>
                             </div>
 
@@ -266,7 +267,7 @@
                             </div>
                             <div class="posttext pull-left">
                                 <p><span style="color: #697683;font-size: 12px; font-weight: bold; ;"><i class="fa fa-share" style="font-size: 12px; margin-right: 3px;"> </i> {{ $reply->created_at->diffForHumans() }}
-                                    </span> <b>-</b> <span style="color: #363838; font-weight: bold;">{{ $reply->user->name }} : </span>{{ $reply->content }} </p>
+                                    </span> <b>-</b> <span style="color: #363838; font-weight: bold;">{{ $reply->user->name }} : </span>{!! $reply->content !!} </p>
                         @if (Auth::check())
                             @if(Auth::id() == $reply->user->id)
                                 @if(!$reply->best_answer)
@@ -401,7 +402,7 @@
                     
                     @include('includes.poll-sidebar')
 
-                    @include('includes.my-sidebar')
+                    @include('includes.admin-sidebar')
 
                 </div>
             </div>

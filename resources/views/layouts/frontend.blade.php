@@ -32,6 +32,8 @@
 
         <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}"/>
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.2/styles/railscasts.min.css"/>
+
         @yield('styles')
 
     </head>
@@ -112,8 +114,13 @@
                 console.log(this.value);
             });
         </script>
+            
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.2/highlight.min.js"></script>
 
         @yield('scripts')
+
+        <script>hljs.initHighlightingOnLoad();</script>
 
     </body>
 

@@ -67,18 +67,25 @@
                             </div>
                             <div class="posttext pull-left">
                                 
-                                <h2><span style="color: #697683; font-weight: 300;">{{ $dis->user->name }} : </span> <a href="{{ route('discussion', ['slug' => $dis->slug ]) }} ">{{ str_limit($dis->title, 30) }}</a> 
+                                <h2><span style="color: #697683; font-weight: 300;">{{ $dis->user->name }} : </span> <a href="{{ route('discussion', ['slug' => $dis->slug ]) }} ">{{ str_limit(strip_tags($dis->title), 25) }}</a> 
                             @if($dis->hasBestAnswer())
                                 <span class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Closed Discussion"><span class="badge" style="padding: 0px 0px;"><div class="status-red">&nbsp;</div></span> Closed</span>
                             @else 
                                 <span class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Open Discussion"><span class="badge" style="padding: 0px 0px;"><div class="status-green">&nbsp;</div></span> Open</span>
                             @endif
+
+                                @if(Auth::check())
+                                    @if(Auth::user()->admin)
+                                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete Discussion" href="{{ route('discussion.delete', ['slug' => $dis->slug ]) }}" onclick="return confirm('Are you sure ?')"><span class="badge"><i class="fa fa-times"></i></span> </a>
+                                    @endif
+                                @endif
+
                             
                                     <span style="color: #697683;font-size: 12px; font-weight: bold; ; margin-left: 10px;"><i class="fa fa-hand-o-right" style="font-size: 12px; margin-right: 3px;"> </i> <a href="{{ route('channel', ['slug' => $dis->channel->slug ]) }}" style="color: #697683; font-size: 12px; font-weight: bold;">{{ $dis->channel->title }} </a>
                                     </span>
                                 </h2>
                                     
-                                <p>{{ str_limit($dis->content, 120) }}</p>
+                                <p>{{ str_limit(strip_tags($dis->content), 120) }}</p>
                                 
                             </div>
                             <div class="clearfix"></div>
@@ -107,7 +114,7 @@
                     
                     @include('includes.poll-sidebar')
 
-                    @include('includes.my-sidebar')
+                    @include('includes.admin-sidebar')
 
                 </div>
             </div>

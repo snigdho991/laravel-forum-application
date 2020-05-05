@@ -136,6 +136,12 @@ Route::group(['middleware' => 'auth'], function(){
 		'as'   => 'discussion.update'
 	]);
 
+
+	Route::get('/discussion/delete/{slug}', [
+		'uses' => 'DiscussionsController@delete',
+		'as'   => 'discussion.delete'
+	])->middleware('admin');
+
 	Route::get('/reply/edit/{id}', [
 		'uses' => 'RepliesController@edit',
 		'as'   => 'reply.edit'
