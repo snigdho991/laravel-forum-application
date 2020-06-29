@@ -17,9 +17,9 @@
 
                 <div class="col-lg-4 search hidden-xs hidden-sm col-md-3">
                     <div class="wrap">
-                        <form action="#" method="post" class="form">
-                            <div class="pull-left txt"><input type="text" class="form-control" placeholder="Search Topics"></div>
-                            <div class="pull-right"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></div>
+                        <form action="{{ route('forum.search') }}" method="GET" class="form">
+                            <div class="pull-left txt"><input type="text" name="query" class="form-control" placeholder="Search Topics"></div>
+                            <div class="pull-right"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></div>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -67,9 +67,9 @@
                 </div>
                 <div class="col-lg-4 search hidden-xs hidden-sm col-md-3">
                     <div class="wrap">
-                        <form action="#" method="post" class="form">
-                            <div class="pull-left txt"><input type="text" class="form-control" placeholder="Search Topics"></div>
-                            <div class="pull-right"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></div>
+                        <form action="{{ route('forum.search') }}" method="GET" class="form">
+                            <div class="pull-left txt"><input type="text" name="query" class="form-control" placeholder="Search Topics"></div>
+                            <div class="pull-right"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></div>
                             <div class="clearfix"></div>
                         </form>
                     </div>

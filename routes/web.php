@@ -53,6 +53,11 @@ Route::get('/forum', [
 	'as'   => 'forum'
 ]);
 
+Route::get('/searchresults', [
+    'uses' => 'ForumController@search',
+	'as'   => 'forum.search'
+]);
+
 Route::get('{provider}/auth', [
 	'uses' => 'SocialsController@auth',
 	'as'   => 'social.auth'

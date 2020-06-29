@@ -9,6 +9,12 @@
         padding: 0 30px 10px 94px;
     }
 
+    .postinfobot_3{
+        border-bottom: dashed 1px #f1f1f1;
+        line-height: 50px;
+        padding: 0 30px 10px 94px;
+    }
+
     .newtopic input[type=email] {
         border-radius: 2px;
         box-shadow: none;
@@ -124,6 +130,26 @@
                                 <div class="clearfix"></div>
                             </div>  
                         </div><!-- acc section END -->
+
+                        <div class="postinfobot_3">
+                            <div class="notechbox pull-left" style="margin-left: 22px;">
+                                <input type="radio" id ="admin" name="loginvalue" style="cursor: pointer;">
+                            </div>
+
+                            <div class="pull-left lblfch postreply">
+                                <label for="note"> Login as an Admin </label>
+                            </div>
+
+                            <div class="pull-right lblfch postreply">
+                                <label for="note"> Login as a member </label>
+                            </div>
+
+                            <div class="notechbox pull-right" style="margin-left: 22px;">
+                                <input type="radio" id="member" name="loginvalue" style="cursor: pointer;">
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
                         
                         <div class="postinfobot_2">
                             <div class="notechbox pull-left" style="margin-left: 22px;">

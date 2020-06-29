@@ -122,6 +122,18 @@
 
         <script>hljs.initHighlightingOnLoad();</script>
 
+        <script>
+            $('#admin').click(function(){
+                $('#email').val("admin@forum.com");
+                $('#password').val('123');
+            });
+
+            $('#member').click(function(){
+                $('#email').val('argho@bdforum.com');
+                $('#password').val('123');
+            });
+        </script>
+
     </body>
 
 <!-- Mirrored from forum.azyrusthemes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 19 Apr 2020 17:26:47 GMT -->

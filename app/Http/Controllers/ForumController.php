@@ -76,6 +76,12 @@ class ForumController extends Controller
         return view('forum')->with(['discussions' => $results]);
     }
 
+    public function search()
+    {
+        $results = Discussion::where('title', 'like', '%' . request('query') . '%')->paginate(5);
+        return view('forum')->with(['discussions' => $results]);
+    }
+
     public function channel($slug)
     {
     	$channel = Channel::where('slug', $slug)->first();

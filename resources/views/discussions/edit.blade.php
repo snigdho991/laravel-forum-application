@@ -48,7 +48,7 @@
                                         <label for="channel">Picked Channel :</label> <b>(Non editable) </b>
                                         <select name="channel_id" id="channel_id" class="form-control" >
                                             @foreach($channels as $channel)
-                                                <option value="{{ $channel->id }}"  disabled=""
+                                                <option value="{{ $channel->id }}" disabled=""
                                                 @if($discussion->channel_id == $channel->id)
                                                     selected 
                                                 @endif>{{ $channel->title }}</option>

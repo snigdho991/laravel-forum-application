@@ -8,7 +8,7 @@ return [
     'providers' => [
         'facebook' => [
             'client_id' => '510855739593306',
-            'client_secret' => '5520e59ba5c06ca6abd7242dc210541b',
+            'client_secret' => 'f69ca97ebe9e0c2604fccae66fdc64ba',
             'redirect_uri' => 'http://forumapps.test/facebook/redirect',
             'scope' => [],
         ],
